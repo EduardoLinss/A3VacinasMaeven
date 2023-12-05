@@ -3,30 +3,43 @@ package demo.Frames.caderneta;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.*;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
+import demo.Conexao.Conexao;
 import demo.DAO.DAOcaderneta;
 import demo.entidade.caderneta;
 
 public class cadernetaFrame extends JFrame {
     
-
+    private JTable tabela;
+    private static DefaultTableModel modelo;
     public void Caderneta(){
            JPanel infos = new JPanel();
 
+           modelo = new DefaultTableModel();
+           tabela = new JTable(modelo);
+
+       
            
            
+           modelo.addColumn("Vacina");
+           modelo.addColumn("Data de aplicacao");
+           modelo.addColumn("Dose");
+           modelo.addColumn("Local");
+           modelo.addColumn("Cidade");
+           
+
            try {
-            for (caderneta u : DAOcaderneta.ConsultaVacinas()) {
+           /*  for (caderneta u : DAOcaderneta.ConsultaVacinas()) {
                 infos.setLayout(new GridLayout(0, 2, 5, 5));
                 infos.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
                 infos.add(new JLabel("Vacina"));
@@ -47,7 +60,9 @@ public class cadernetaFrame extends JFrame {
             }
    
                 
-            }
+            }*/
+
+            pesquisar();
         } catch (Exception e) {
            
             e.printStackTrace();
@@ -99,6 +114,9 @@ public class cadernetaFrame extends JFrame {
             
         });
 
+        JScrollPane scrollPane = new JScrollPane(tabela);
+        //getContentPane().add(scrollPane, BorderLayout.CENTER);
+
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1, 2, 10, 0));
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
@@ -107,6 +125,8 @@ public class cadernetaFrame extends JFrame {
         buttonsPanel.add(btnEditar);
 
         add(infos, BorderLayout.NORTH);
+        //add(tabela, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER);
         add(buttonsPanel, BorderLayout.SOUTH);
     
      setTitle("dashboard");
@@ -114,5 +134,33 @@ public class cadernetaFrame extends JFrame {
      setSize(1100, 650);
     setLocationRelativeTo(null);
     setVisible(true);
+    }
+
+
+    public static void pesquisar() throws SQLException{
+            String sql = "select * from caderneta ";
+        
+            PreparedStatement ps = null;
+            ResultSet scan = null;
+            try{
+                ps = Conexao.openDatabase().prepareStatement(sql);
+                
+                scan = ps.executeQuery();
+
+                while (scan.next()) {
+                    String nome = scan.getString("NomeVacina");
+                    String data = scan.getString("dataAplic");
+                    String dose = scan.getString("dose");
+                    String local = scan.getString("local");
+                    String cidade = scan.getString("cidade");
+
+                    
+                    modelo.addRow(new Object[]{nome, data, dose, local, cidade});
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+            
+           
     }
 }

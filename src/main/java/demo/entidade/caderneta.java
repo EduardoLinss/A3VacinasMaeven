@@ -8,14 +8,13 @@ public class caderneta {
     private String dose;
     private String local;
     private String cidade;
-    private Component nome2;
-
+    
 
     public caderneta(String nome, String dataAplic, String dose, String local, String cidade){
         this.nome = nome;
         this.dataAplic = dataAplic;
         this.dose = dose;
-        this.local = local;
+        this.local = local;s
         this.cidade = cidade;
     }
   

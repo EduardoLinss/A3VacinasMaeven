@@ -60,7 +60,7 @@ public class editarvacinaFrame extends JFrame {
         cidadeField = new JTextField();
 
 
-        JButton btnPesquisar = new JButton("Digite qual aplicação deseja alterar");
+        JButton btnPesquisar = new JButton("Pesquisar");
         btnPesquisar.addActionListener(new ActionListener() {
 
             @Override
@@ -158,6 +158,25 @@ public class editarvacinaFrame extends JFrame {
                 }
             }
             
+
+            
+        });
+
+        JButton btnLimparPesquisa = new JButton("Limpar pesquisa");
+        btnLimparPesquisa.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vacinaAeditarField.setText(" ");
+                nomeVacinaField.setText(" ");
+                dataAplicField.setText(" ");
+                doseField.setText(" ");
+                localField.setText(" ");
+                cidadeField.setText(" ");
+
+                
+            }
+            
         });
 
 
@@ -212,6 +231,7 @@ public class editarvacinaFrame extends JFrame {
         buttonsPanel.setLayout(new GridLayout(1, 2, 10, 0));
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
         buttonsPanel.add(btnPesquisar);
+        buttonsPanel.add(btnLimparPesquisa);
         buttonsPanel.add(lbnomeVacina);
         buttonsPanel.add(vacinaAeditarField);
         

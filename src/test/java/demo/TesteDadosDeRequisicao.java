@@ -17,9 +17,7 @@ public class TesteDadosDeRequisicao {
     
     String pesquisa;
 
-    /**
-     * 
-     */
+ 
     @Test
     public void TesteRequisicao(){
         List <requsicao> dados = new ArrayList<requsicao>();

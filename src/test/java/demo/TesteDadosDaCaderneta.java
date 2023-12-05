@@ -1,9 +1,4 @@
 package demo;
-
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,8 +15,6 @@ import demo.entidade.caderneta;
 public class TesteDadosDaCaderneta {
     
 
-
-   
     @Test
     public void TesteDadosDaCaderneta() throws Exception{
         List <caderneta> list = new ArrayList<caderneta>();
