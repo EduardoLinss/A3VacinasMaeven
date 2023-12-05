@@ -1,6 +1,6 @@
 package demo.entidade;
 
-import java.awt.Component;
+
 
 public class caderneta {
     private String nome;
