@@ -14,7 +14,7 @@ public class caderneta {
         this.nome = nome;
         this.dataAplic = dataAplic;
         this.dose = dose;
-        this.local = local;s
+        this.local = local;
         this.cidade = cidade;
     }
   
