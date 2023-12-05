@@ -40,12 +40,11 @@ public class editarvacinaFrame extends JFrame {
 
     
     public void editarVacina(){
+
+       
         JLabel lbnomeVacinaPesquisar = new JLabel("Digite o nome da vacina");
         vacinaAeditarField = new JTextField();
        
-
-        
-    
 
         
         dataAplicField = new JTextField();
@@ -136,8 +135,22 @@ public class editarvacinaFrame extends JFrame {
                 }
                 
             });
+
+            JButton btnLimpar = new JButton("Nova edição");
+            btnLimpar.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                   removeAll();
+                   dispose();
+                   editarvacinaFrame reopen = new editarvacinaFrame();
+                   reopen.editarVacina();
+                }
+                
+            });
             
             formPanel.add(btnEditar);
+            formPanel.add(btnLimpar);
                 
             }
                 
@@ -174,6 +187,7 @@ public class editarvacinaFrame extends JFrame {
                 localField.setText(" ");
                 cidadeField.setText(" ");
 
+                
                 
             }
             
@@ -227,6 +241,7 @@ public class editarvacinaFrame extends JFrame {
             
         });
 
+
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1, 2, 10, 0));
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
@@ -257,7 +272,7 @@ public class editarvacinaFrame extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
 
-
+    
     
     }
 
