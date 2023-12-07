@@ -14,23 +14,35 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
+import demo.Frames.alerta.alertaFrame;
 import demo.Frames.caderneta.cadernetaFrame;
 import demo.Frames.dependentes.dependentesFrames;
+import demo.Frames.login.EditarCadastro;
+import demo.Frames.login.FormLogin;
 import demo.Frames.requisicao.requisicaoFramePesquisa;
-
-
 
 
 public class MainFrame extends JFrame {
     final private Font mainFont = new Font("Arial", Font.BOLD, 18);
-    public void iniciar (){
 
+    JTextField txtUsuario;
+    public void iniciar (){
+        FormLogin x = new FormLogin();
+       
         JPanel info = new JPanel();
         info.setLayout(new GridLayout(0, 2, 5, 5));
+        
+        JLabel usuario = new JLabel("Usuario");
+        txtUsuario = new JTextField();
+    
 
+
+        info.add(txtUsuario);
+        info.add(usuario);
         JLabel menuInfo = new JLabel("Menu", SwingConstants.CENTER);
         menuInfo.setFont(mainFont);
 
@@ -109,6 +121,17 @@ public class MainFrame extends JFrame {
             }
             
         });
+
+        JButton btnEditarCadastro = new JButton("Editar Cadastro");
+        btnEditarCadastro.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               EditarCadastro botaoEditarCadastro = new EditarCadastro();
+               botaoEditarCadastro.EditarCadastro();
+            }
+            
+        });
     
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridBagLayout());      
@@ -120,9 +143,11 @@ public class MainFrame extends JFrame {
         buttonsPanel.add(btnDependentes);
         buttonsPanel.add(btnCaderneta);
         buttonsPanel.add(btnVacinas);
+        
       
         add(info, BorderLayout.NORTH);
         add(buttonsPanel, BoxLayout.X_AXIS);
+        add(btnEditarCadastro, BorderLayout.AFTER_LINE_ENDS);
 
         setTitle("dashboard");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

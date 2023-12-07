@@ -74,16 +74,7 @@ public class editarvacinaFrame extends JFrame {
                     formPanel.setLayout(new GridLayout(0, 1, 10, 10));
                     formPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
                     formPanel.setBounds(100, 300, 300, 100);
-                    /*formPanel.add(lbnomeVacina);
-                    formPanel.add(nomeVacinaField);
-                    formPanel.add(lbdataAplic);
-                    formPanel.add(dataAplicField);
-                    formPanel.add(lbdose);
-                    formPanel.add(doseField);
-                    formPanel.add(lblocal);
-                    formPanel.add(localField);
-                    formPanel.add(lbcidade);
-                    formPanel.add(cidadeField);*/
+      
 
                     add(formPanel);
 
@@ -109,7 +100,7 @@ public class editarvacinaFrame extends JFrame {
 
             }
 
-            //Component[] texts = formPanel.getComponents();
+           
             JButton btnEditar = new JButton("Editar");
             btnEditar.addActionListener(new ActionListener() {
 
@@ -195,53 +186,6 @@ public class editarvacinaFrame extends JFrame {
 
 
 
-
-
-       
-        JButton btnEditar = new JButton("editar");
-         JPanel infos = new JPanel();
-
-        btnEditar.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-              try {
-           /*  for (caderneta u : DAOcaderneta.ConsultaVacinas()) {
-                infos.setLayout(new GridLayout(0, 2, 5, 5));
-                infos.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
-                infos.add(new JLabel("Vacina"));
-                infos.add(new JTextField(u.getNome()));
-                infos.add(new JLabel("Data de aplicacao"));
-                infos.add(new JLabel(u.getDataAplic()));
-                infos.add(new JLabel("dose"));
-                infos.add(new JLabel(u.getDose()));
-                infos.add(new JLabel("local"));
-                infos.add(new JLabel(u.getLocal()));
-                infos.add(new JLabel("Cidade"));
-                infos.add(new JLabel(u.getCidade()));
-                
-                Component[] labels = infos.getComponents();
-                for (int i = 0; i < labels.length; i++) {
-                    labels[i].setFont(new Font("Segoe print", Font.BOLD, 18));
-            
-
-            }
-
-            //Component[] texts = formPanel.getComponents();
-            
-            
-        
-                
-            }*/
-        } catch (Exception e2) {
-           
-            e2.printStackTrace();
-        }
-            }
-            
-        });
-
-
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1, 2, 10, 0));
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
@@ -252,17 +196,9 @@ public class editarvacinaFrame extends JFrame {
         
            
 
-        /*JPanel formPanel = new JPanel();
-        formPanel.setLayout(new GridLayout(0, 1, 10, 10));
-        formPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
-        formPanel.setBounds(100, 300, 300, 100);
-        formPanel.add(lbnomeVacina);
-        formPanel.add(vacinaAeditarField);*/
-        //add(formPanel, BorderLayout.NORTH);
+    
         add(buttonsPanel, BorderLayout.NORTH);
         
-       // add(lbnomeVacinaPesquisar, BorderLayout.NORTH);
-       // add(vacinaAeditarField, BorderLayout.NORTH);
 
 
 

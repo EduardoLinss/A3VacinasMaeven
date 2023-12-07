@@ -107,7 +107,29 @@ public void AdicionarAlerta(alerta alerta){
        }
        }
        return dados;
-    }  
+    } 
+    
+    public void CadastraAlertaFrame(String nomeVacina, String dataAplic) {
+        String sql = "insert into alerta (NomeVacina, dataProx) values (?, ?)";
+
+   PreparedStatement ps = null;
+
+   try {
+
+       if (ps == null){
+       ps = Conexao.openDatabase().prepareStatement(sql);
+       ps.setString(1, nomeVacina);
+       ps.setString(2, dataAplic);
+     
+       ps.execute();
+       ps.close();
+       }
+   } catch (SQLException e) {
+      
+       e.printStackTrace();
+   }
+
+   }
 
 }
 

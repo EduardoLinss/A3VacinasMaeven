@@ -7,18 +7,25 @@ import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
-
-
 import demo.Conexao.Conexao;
+
 import demo.Frames.MainFrame;
+import demo.entidade.login;
 
 
 public class FormLogin extends JFrame {
     final private Font mainFont = new Font("Arial", Font.BOLD, 18);
     JTextField tfEmail;
     JPasswordField pfPassword;
+
+
+                
+  
 
     public void initialize() {
         /*************** Form Panel ***************/
@@ -37,6 +44,7 @@ public class FormLogin extends JFrame {
         pfPassword = new JPasswordField();
         pfPassword.setFont(mainFont);
 
+      
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridLayout(0, 1, 10, 10));
         formPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
@@ -45,7 +53,8 @@ public class FormLogin extends JFrame {
         formPanel.add(tfEmail);
         formPanel.add(lbPassword);
         formPanel.add(pfPassword);
-
+       
+       
         /*************** Buttons Panel ***************/
         JButton btnLogin = new JButton("Login");
         btnLogin.setFont(mainFont);
@@ -54,8 +63,11 @@ public class FormLogin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                String email = tfEmail.getText();
-                String password = String.valueOf(pfPassword.getPassword());
+
+                abrir();
+                 /*String email = tfEmail.getText();
+        String password = String.valueOf(pfPassword.getPassword());
+                
 
                 //login user = getAuthenticatedUser(email, password);
                
@@ -79,8 +91,10 @@ public class FormLogin extends JFrame {
                 } catch (SQLException e1) {
                     
                     e1.printStackTrace();
-                }
+                }*/
+              
             }
+      
             
         });
 
@@ -120,10 +134,12 @@ public class FormLogin extends JFrame {
         /*************** Initialise the frame ***************/
         add(formPanel, BorderLayout.NORTH);
         add(buttonsPanel, BorderLayout.SOUTH);
+       
 
         setTitle("Login Form");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setSize(400, 500);
+        //setSize(400, 500);
+        setSize(1000, 1000);
         setMinimumSize(new Dimension(350, 450));
         //setResizable(false);
         setLocationRelativeTo(null);
@@ -155,12 +171,64 @@ public class FormLogin extends JFrame {
     }
 
 
-    public static boolean validarLogin(boolean originalData, boolean originalData2) {
-        return false;
-    }
 
 
-    public void validarLogin(com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String email,
-            com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String senha) {
+
+    public boolean CadastrarUsuarioFrame(String nomes, String senhas, String emails, String cpfs, String dataNascs) {
+        String sql = "insert into login (nome, senha, email, cpf, dataNasc) values (?, ?, ?, ?, ?)";
+
+        PreparedStatement ps = null;
+
+        try {
+
+            if (ps == null){
+            ps = Conexao.openDatabase().prepareStatement(sql);
+            ps.setString(1, nomes);
+            ps.setString(2, senhas);
+            ps.setString(3, emails);
+            ps.setString(4, cpfs);
+            ps.setString(5, dataNascs);
+
+            ps.execute();
+            ps.close();
+            }
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+        }
+        return ps != null;
+
     }
+
+    public void abrir(){
+        String email = tfEmail.getText();
+       String password = String.valueOf(pfPassword.getPassword());
+        
+       EditarCadastro novatela = new EditarCadastro();
+                try {
+                    if (validarLogin(email, password) != false) {
+                         MainFrame mainFrame = new MainFrame();
+                        mainFrame.iniciar();;
+                        dispose();
+                        
+                       // JOptionPane.showMessageDialog(FormLogin.this, "Login válido", "Try agaain", JOptionPane.YES_OPTION);             
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(FormLogin.this,
+                                "Email or Password Invalid",
+                                "Try again",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (HeadlessException e1) {
+                    
+                    e1.printStackTrace();
+                } catch (SQLException e1) {
+                    
+                    e1.printStackTrace();
+    }
+
+   
+    }
+
+  
 }
