@@ -2,64 +2,96 @@ package demo.Frames;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 
-import demo.DAO.DAOubs;
-import demo.entidade.ubs;
+import demo.Conexao.Conexao;
+
 
 public class ubsFrame extends JFrame {
-   // final private Font mainFont = new Font("Segoe print", Font.BOLD, 18);
+    private JTable tabela;
+    private static DefaultTableModel modelo;
 
-    public void iniciarUbs(){
-         JPanel infos = new JPanel();
-       // ubs ubs = new ubs();
-      // DAOubs ubs = new DAOubs();
+          public void iniciarUbs(){
+            
+                  modelo = new DefaultTableModel();
+                  tabela = new JTable(modelo);
+                  modelo.addColumn("Endereco");
+                  modelo.addColumn("Cep");
 
-       for (ubs u : DAOubs.getUbs()) {
-        infos.setLayout(new GridLayout(0, 4, 5, 5));
-        infos.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
-        infos.add(new JLabel("Endereco"));
-        infos.add(new JLabel(u.getEndereco()));
-        infos.add(new JLabel("cep"));
-        infos.add(new JLabel(u.getCep()));
+                  try {
+                    pesquisar();
+                  } catch (Exception e) {
+                    e.printStackTrace();
+                  }
 
-        Component[] labels = infos.getComponents();
-        for (int i = 0; i < labels.length; i++) {
-            labels[i].setFont(new Font("Segoe print", Font.BOLD, 18));
+                  JButton btnVoltar = new JButton();
+                  btnVoltar.addActionListener(new ActionListener() {
 
-       }
-        
-    } 
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                     
+                      dispose();
+                      new ubsFrame().setVisible(false);
+                    }
+                    
+                  });
 
-    JButton btnVoltar = new JButton();
-    btnVoltar.addActionListener(new ActionListener() {
+                JPanel buttonsPanel = new JPanel();
+                buttonsPanel.setLayout(new GridLayout(1, 2, 10, 0));
+                buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
+                buttonsPanel.add(btnVoltar);
 
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        dispose();
-      }
-      
-    });
+                JScrollPane scrollPane = new JScrollPane(tabela);
 
-    add(infos, BorderLayout.NORTH);
-    add(btnVoltar, BorderLayout.SOUTH);
-    
-     setTitle("dashboard");
-    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-     setSize(1100, 650);
-    setLocationRelativeTo(null);
-    setVisible(true);
-}
+                
+                add(scrollPane, BorderLayout.CENTER);
+                add(buttonsPanel, BorderLayout.SOUTH);
+                //add(btnVoltar, BorderLayout.SOUTH);
+                
+                setTitle("dashboard");
+                setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                setSize(1100, 650);
+                setLocationRelativeTo(null);
+                setVisible(true);
+            }
 
+            public static void pesquisar() throws SQLException{
+                      String sql = "select * from ubs ";
+                  
+                      PreparedStatement ps = null;
+                      ResultSet scan = null;
+                      try{
+                          ps = Conexao.openDatabase().prepareStatement(sql);
+                          
+                          scan = ps.executeQuery();
 
+                          while (scan.next()) {
+                              String nome = scan.getString("endereco");
+                              String cep = scan.getString("cep");
+                            
+
+                              
+                              modelo.addRow(new Object[]{nome, cep});
+                          }
+                      }catch(SQLException e){
+                          e.printStackTrace();
+                      }
+                    }
 }

@@ -15,25 +15,33 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 
 import demo.Conexao.Conexao;
 import demo.entidade.requsicao;
 
 public class requisicaoFramePesquisa extends JFrame {
     //final private Font mainFont = new Font("Arial", Font.BOLD, 18);
+
+     private JTable tabela;
+    private static DefaultTableModel modelo;
     static JTextField tfpesquisa;
    
     public void pesquisar(){
 
-        
+        modelo = new DefaultTableModel();
+        tabela = new JTable(modelo);
+        modelo.addColumn("Pais");
+        modelo.addColumn("Vacinas necessarias");  
+
 
 
         JLabel lbpesquisaPais = new JLabel("Pesquisar vacinas em outros Paises", SwingConstants.CENTER);
-        
-
         JLabel lbpesquisa = new JLabel("Pesquisar");
         tfpesquisa = new JTextField();
         
@@ -57,22 +65,7 @@ public class requisicaoFramePesquisa extends JFrame {
                     
                     if(pesquisar(pesquisa)!= false){
 
-                        for (requsicao u : getPeloNome(pesquisa)) {
-                           // infos.setLayout(new GridLayout(0, 2, 5, 5));
-                           // infos.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
-                            //infos.add(new JLabel("Pais"));
-                            //infos.add(new JLabel(u.getnomePais()));
-                            //infos.add(new JLabel("Vacinas necessárias"));
-                            //infos.add(new JLabel(u.getVacinas()));
-                
-                           // Component[] labels = infos.getComponents();
-                            //for (int i = 0; i < labels.length; i++) {
-                           //     labels[i].setFont(new Font("Segoe print", Font.BOLD, 18));
-                
-                       // }
-                    
-                    }          
-                        
+                            pesquisar2(pesquisa);
                 
            
         }
@@ -84,17 +77,18 @@ public class requisicaoFramePesquisa extends JFrame {
             
         });
 
-        JButton btnVoltar = new JButton("Voltar");
-        btnVoltar.addActionListener(new ActionListener() {
+            JButton btnVoltar = new JButton("Voltar");
+             btnVoltar.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                @Override
+                public void actionPerformed(ActionEvent e) {
                 setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                
                 dispose();
             }
             
         } );
+
+        
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1, 2, 10, 0));
@@ -102,9 +96,10 @@ public class requisicaoFramePesquisa extends JFrame {
         buttonsPanel.add(Pesquisar);
         buttonsPanel.add(btnVoltar);
 
+        JScrollPane scrollPane = new JScrollPane(tabela);
 
         add(formPanel, BorderLayout.NORTH);
-        add(infos, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER);
         add(buttonsPanel, BorderLayout.SOUTH);  
 
 
@@ -175,5 +170,24 @@ public class requisicaoFramePesquisa extends JFrame {
        }
        return dados;
     }
+
+    public static void pesquisar2(String pesquisa) throws SQLException{
+        String sql = "select * from requisicao where NomePais=? ";
+                  
+        PreparedStatement ps = null;
+        ResultSet scan = null;
+            try{
+                ps = Conexao.openDatabase().prepareStatement(sql);
+                ps.setString(1, pesquisa);
+                scan = ps.executeQuery();
+                while (scan.next()) {
+                    String pais = scan.getString("NomePais");
+                    String vacina = scan.getString("vacinas");
+                    modelo.addRow(new Object[]{pais, vacina});
+                }
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
 }
 

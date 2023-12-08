@@ -1,4 +1,4 @@
-package demo.Frames.alerta;
+package demo.Frames.dependentes;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -25,20 +25,17 @@ import demo.Conexao.Conexao;
 import demo.Frames.caderneta.editarvacinaFrame;
 import demo.entidade.alerta;
 import demo.entidade.caderneta;
+import demo.entidade.dependentes;
 
-public class editarAlertaFrame extends JFrame {
+public class editarDependentes extends JFrame {
     
     JTextField vacinaAeditarField;
-    JTextField nomeVacinaField;
-    JTextField dataAplicField;
-    JTextField doseField;
-    JTextField localField;
-    JTextField cidadeField;
-    JLabel lbnomeVacina = new JLabel("Vacina");
-    JLabel lbdataAplic = new JLabel("Data de aplicacao");
-    JLabel lbdose = new JLabel("Dose");
-    JLabel lblocal = new JLabel("Local");
-    JLabel lbcidade = new JLabel("Cidade");
+    JTextField nome;
+    JTextField cpf;
+    JTextField idade;
+    JLabel lbnomeVacina = new JLabel("NJome");
+    JLabel lbdataAplic = new JLabel("Cpf");
+    JLabel lbdose = new JLabel("Idade");
 
     
     public void editar(){
@@ -49,16 +46,16 @@ public class editarAlertaFrame extends JFrame {
        
 
         
-        dataAplicField = new JTextField();
+        nome = new JTextField();
 
         
-        doseField = new JTextField();
+        cpf = new JTextField();
 
          
-        localField = new JTextField();
+        idade = new JTextField();
 
          
-        cidadeField = new JTextField();
+      
 
 
         JButton btnPesquisar = new JButton("Pesquisar");
@@ -82,12 +79,14 @@ public class editarAlertaFrame extends JFrame {
 
 
 
-                for (alerta u : NomeDaVacina(pesquisa)) {
+                for (dependentes u : NomeDaVacina(pesquisa)) {
                
                 formPanel.add(lbnomeVacina);
-                formPanel.add(nomeVacinaField= new JTextField(u.getNomeVacina()));
+                formPanel.add(nome= new JTextField(u.getNome()));
                 formPanel.add(lbdataAplic);
-                formPanel.add(dataAplicField = new JTextField(u.getDataProx()));
+                formPanel.add(cpf = new JTextField(u.getCpf()));
+                formPanel.add(lbdose);
+                formPanel.add(idade = new JTextField(u.getIdade()));
                 
                 
                 Component[] labels = formPanel.getComponents();
@@ -105,14 +104,13 @@ public class editarAlertaFrame extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                    // DAOcaderneta update = new DAOcaderneta();
                     
-                    String nomes = nomeVacinaField.getText();
-                    String datas = dataAplicField.getText();
-                    String doses = doseField.getText();
-                    String locais = localField.getText();
-                    String cidades = cidadeField.getText();
+                    String nomes = nome.getText();
+                    String datas = cpf.getText();
+                    String doses = idade.getText();
+                  
 
-                if(AtualizaAlertaFrames(nomes, datas)){
-                 JOptionPane.showMessageDialog(editarAlertaFrame.this,
+                if(AtualizaDependentesFrames(nomes, datas, doses)){
+                 JOptionPane.showMessageDialog(editarDependentes.this,
                  "Dados atualizados com sucesso",
                 "Sucesso!",
                 JOptionPane.YES_OPTION);
@@ -131,7 +129,7 @@ public class editarAlertaFrame extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                    removeAll();
                    dispose();
-                   editarAlertaFrame reopen = new editarAlertaFrame();
+                   editarDependentes reopen = new editarDependentes();
                    reopen.editar();
                 }
                 
@@ -154,7 +152,7 @@ public class editarAlertaFrame extends JFrame {
                     
                     e1.printStackTrace();
                 } catch (Exception e1) {
-                    
+                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }
@@ -167,12 +165,10 @@ public class editarAlertaFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 vacinaAeditarField.setText(" ");
-                nomeVacinaField.setText(" ");
-                dataAplicField.setText(" ");
-                doseField.setText(" ");
-                localField.setText(" ");
-                cidadeField.setText(" ");
-
+                nome.setText(" ");
+                idade.setText(" ");
+                cpf.setText(" ");
+             
                 
                 
             }
@@ -206,8 +202,8 @@ public class editarAlertaFrame extends JFrame {
     
     
     }
-public boolean AtualizaAlertaFrames(String nome, String dataAplic){
-        String sql = "update alerta SET NomeVacina=?, dataProx=?  WHERE NomeVacina = ?";
+public boolean AtualizaDependentesFrames(String nome, String dataAplic, String idade ){
+        String sql = "update dependentes SET nome=?, cpf=?, idade=?  WHERE nome = ?";
 
         PreparedStatement ps=null;
         String pesquisa = vacinaAeditarField.getText();
@@ -219,8 +215,9 @@ public boolean AtualizaAlertaFrames(String nome, String dataAplic){
 
             ps.setString(1, nome);
             ps.setString(2, dataAplic);
+            ps.setString(3, idade);
      
-            ps.setString(3, pesquisa);
+            ps.setString(4, pesquisa);
             ps.execute();
             ps.close();
             }
@@ -231,7 +228,7 @@ public boolean AtualizaAlertaFrames(String nome, String dataAplic){
     }
 
     public static boolean pesquisar(String nomeVacina) throws SQLException{
-        String sql = "select * from alerta where NomeVacina= ? ";
+        String sql = "select * from dependentes where nome= ? ";
     
         PreparedStatement ps = null;
         ResultSet scan = null;
@@ -248,9 +245,9 @@ public boolean AtualizaAlertaFrames(String nome, String dataAplic){
     }
 
 
-    public static List<alerta> NomeDaVacina(String pesquisa){
-        List <alerta> dados = new ArrayList<alerta>();
-        String sql = "select * from alerta where NomeVacina=?"; 
+    public static List<dependentes> NomeDaVacina(String pesquisa){
+        List <dependentes> dados = new ArrayList<dependentes>();
+        String sql = "select * from dependentes where nome=?"; 
 
        PreparedStatement ps = null;
        ResultSet scann = null;
@@ -262,14 +259,15 @@ public boolean AtualizaAlertaFrames(String nome, String dataAplic){
             ps.executeQuery();
             scann = ps.executeQuery();
             while (scann.next()) {
-                alerta alerta = new alerta(0, sql, sql);
+                dependentes dependentes = new dependentes(0, sql, sql, sql);
                
-                alerta.setNomeVacina(scann.getString("NomeVacina"));
-                alerta.setdataProc(scann.getString("dataProx"));
+                dependentes.setNome(scann.getString("nome"));
+                dependentes.setCpf(scann.getString("cpf"));
+                dependentes.setIdade(scann.getString("idade"));
                
               
 
-                dados.add(alerta);
+                dados.add(dependentes);
             }
         }
        }catch (SQLException e){

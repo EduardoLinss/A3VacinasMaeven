@@ -25,7 +25,7 @@ public class Conexao {
             dbconn = DriverManager.getConnection(URL, User, Pwd);
             if (dbconn != null) {
 
-                FormLogin retorna = new FormLogin();
+                
                
                 System.out.println("Conectado com sucesso em: " + URL);
                 return dbconn;

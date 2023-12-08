@@ -51,10 +51,10 @@ public class MainFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-              ubsFrame inicaUbs = new ubsFrame();
+              ubs inicaUbs = new ubs();
 
-              inicaUbs.iniciarUbs();
-              dispose();
+             inicaUbs.inicia();
+             
 
             } 
         });
@@ -69,7 +69,7 @@ public class MainFrame extends JFrame {
 
                 requisicaoFramePesquisa chama = new requisicaoFramePesquisa();
                 chama.pesquisar();
-                dispose();
+              
                 
             }
             
@@ -83,7 +83,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
               alertaFrame iniciaAlerta = new alertaFrame();
               iniciaAlerta.iniciaAlerta();
-              dispose();
+              
             }
             
         });
@@ -95,7 +95,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dependentesFrames iniciaDependentes = new dependentesFrames();
                 iniciaDependentes.iniciaDependentes();
-                dispose();
+                
             }
             
         });

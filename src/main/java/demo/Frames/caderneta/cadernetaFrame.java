@@ -1,9 +1,6 @@
 package demo.Frames.caderneta;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.*;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,22 +12,18 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import demo.Conexao.Conexao;
-import demo.DAO.DAOcaderneta;
-import demo.entidade.caderneta;
+
 
 public class cadernetaFrame extends JFrame {
     
     private JTable tabela;
     private static DefaultTableModel modelo;
     public void Caderneta(){
-           JPanel infos = new JPanel();
+           
 
            modelo = new DefaultTableModel();
            tabela = new JTable(modelo);
 
-       
-           
-           
            modelo.addColumn("Vacina");
            modelo.addColumn("Data de aplicacao");
            modelo.addColumn("Dose");
@@ -39,29 +32,6 @@ public class cadernetaFrame extends JFrame {
            
 
            try {
-           /*  for (caderneta u : DAOcaderneta.ConsultaVacinas()) {
-                infos.setLayout(new GridLayout(0, 2, 5, 5));
-                infos.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
-                infos.add(new JLabel("Vacina"));
-                infos.add(new JLabel(u.getNome()));
-                infos.add(new JLabel("Data de aplicacao"));
-                infos.add(new JLabel(u.getDataAplic()));
-                infos.add(new JLabel("dose"));
-                infos.add(new JLabel(u.getDose()));
-                infos.add(new JLabel("local"));
-                infos.add(new JLabel(u.getLocal()));
-                infos.add(new JLabel("Cidade"));
-                infos.add(new JLabel(u.getCidade()));
-                
-                Component[] labels = infos.getComponents();
-                for (int i = 0; i < labels.length; i++) {
-                    labels[i].setFont(new Font("Segoe print", Font.BOLD, 18));
-
-            }
-   
-                
-            }*/
-
             pesquisar();
         } catch (Exception e) {
            
@@ -124,7 +94,7 @@ public class cadernetaFrame extends JFrame {
         buttonsPanel.add(btnVoltar);
         buttonsPanel.add(btnEditar);
 
-        add(infos, BorderLayout.NORTH);
+       // add(infos, BorderLayout.NORTH);
         //add(tabela, BorderLayout.CENTER);
         add(scrollPane, BorderLayout.CENTER);
         add(buttonsPanel, BorderLayout.SOUTH);

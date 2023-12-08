@@ -38,23 +38,23 @@ public class requisicaoFrame extends JFrame {
             for (int i = 0; i < labels.length; i++) {
                 labels[i].setFont(new Font("Segoe print", Font.BOLD, 18));
 
-        }
+            }
     
             
-        }
+            }
   
-    JButton btnVoltar = new JButton("Voltar");
-    btnVoltar.addActionListener(new ActionListener() {
+        JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.addActionListener(new ActionListener() {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
+         @Override
+            public void actionPerformed(ActionEvent e) {
            
          
-         dispose();
-            
-        }
+            dispose();
+                
+            }
         
-    });
+        });
 
     JPanel buttonsPanel = new JPanel();
     buttonsPanel.setLayout(new GridLayout(1, 2, 10, 0));
@@ -75,20 +75,7 @@ public class requisicaoFrame extends JFrame {
     }
 
     
-    /*private static boolean pesquisar(String pesquisa) throws SQLException{
-            String sql = "select * from requisicao where NomePais= ? ";
-            PreparedStatement ps = null;
-            ResultSet scan = null;
-            try{
-                ps = Conexao.openDatabase().prepareStatement(sql);
-                ps.setString(1, pesquisa);
-                //ps.setString(2, password);
-                scan = ps.executeQuery();
-            }catch(SQLException e){
-                e.printStackTrace();
-            }
-            return scan.next();
-    }*/
+  
 
     
 }

@@ -98,48 +98,6 @@ public class MenuDependentes extends JFrame {
         
     }
 
-    public void consultaDependentes(){
-            JPanel infos = new JPanel();
-           
-  
-        try {
-
-
-            
-            for (dependentes u : DAOdependentes.consultaDependentes()) {
-                infos.setLayout(new GridLayout(5, 2, 5, 5));
-               infos.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
-                infos.add(new JLabel("Nome"));
-                infos.add(new JLabel(u.getNome()));
-                infos.add(new JLabel("Cpf"));
-                infos.add(new JLabel(u.getCpf()));
-                infos.add(new JLabel("Idade"));
-                infos.add(new JLabel(u.getIdade()));
-
-                
-               
-                Component[] labels = infos.getComponents();
-                for (int i = 0; i < labels.length; i++) {
-                    labels[i].setFont(new Font("Arial", Font.BOLD, 18));
-                   
-               }
-                
-            }
-        } catch (Exception e1) {
-           
-            e1.printStackTrace();
-        }
-        
-        //add(infos, BorderLayout.NORTH );
-        add(infos);
-       
-
-        setTitle("dashboard");
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-         setSize(1100, 650);
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
 
     
 }

@@ -21,6 +21,7 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 import demo.Conexao.Conexao;
+import demo.entidade.alerta;
 
 
 
@@ -69,8 +70,11 @@ public class alertaFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            editarAlertaFrame botaodeEditar = new editarAlertaFrame();
-            botaodeEditar.editarAlerta();
+            //editarAlertaFrame botaodeEditar = new editarAlertaFrame();
+            //botaodeEditar.editarAlerta();
+
+            editarAlertaFrame botaoeditar = new editarAlertaFrame();
+            botaoeditar.editar();
         }
         
     });

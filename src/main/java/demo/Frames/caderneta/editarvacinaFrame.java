@@ -114,8 +114,8 @@ public class editarvacinaFrame extends JFrame {
                     String locais = localField.getText();
                     String cidades = cidadeField.getText();
 
-                    if(AtualizaVacinasFrames(nomes, datas, doses, locais, cidades)){
-                        JOptionPane.showMessageDialog(editarvacinaFrame.this,
+                if(AtualizaVacinasFrames(nomes, datas, doses, locais, cidades)){
+                 JOptionPane.showMessageDialog(editarvacinaFrame.this,
                  "Dados atualizados com sucesso",
                 "Sucesso!",
                 JOptionPane.YES_OPTION);
@@ -161,9 +161,7 @@ public class editarvacinaFrame extends JFrame {
                     e1.printStackTrace();
                 }
             }
-            
-
-            
+ 
         });
 
         JButton btnLimparPesquisa = new JButton("Limpar pesquisa");
