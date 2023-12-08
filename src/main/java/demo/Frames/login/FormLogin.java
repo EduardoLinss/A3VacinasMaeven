@@ -139,7 +139,7 @@ public class FormLogin extends JFrame {
         setTitle("Login Form");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         //setSize(400, 500);
-        setSize(1000, 1000);
+        setSize(500, 500);
         setMinimumSize(new Dimension(350, 450));
         //setResizable(false);
         setLocationRelativeTo(null);
