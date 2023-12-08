@@ -28,7 +28,7 @@ public class dependentesFrames extends JFrame {
     public void iniciaDependentes(){
     
    
-    JPanel infos = new JPanel();
+    //JPanel infos = new JPanel();
     
 
     modelo = new DefaultTableModel();

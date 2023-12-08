@@ -122,19 +122,7 @@ public class EditarCadastro extends JFrame {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                           /*  FormLogin valor = new FormLogin();
-
-                           
-                            String emailPesquisa = valor.DadoDoJtextField();
-                             String nome = nomeusUarioField.getText();
-                            String senha = senhaUsuarioField.getText();
-                            String email = emailUsuarioField.getText();
-                            String Cpf = cpfUsuarioField.getText();
-                            String data = dataUsuarioField.getText();
-
-                            AtualizarCadastroFrame(nome, senha, email, Cpf, data, emailPesquisa);
-                          
-                   */
+                        
                                 seila();
                         }
                         
@@ -166,7 +154,7 @@ public class EditarCadastro extends JFrame {
     public void AtualizarCadastroFrame(String nome, String senha, String email, String Cpf, String data){
         String sql = "update login SET nome=?, senha =?, email=?, cpf=?, dataNasc = ?  WHERE email = ?";
 
-      
+        String EMAIL = "nfleduardo@gmail.com";
         
 
         PreparedStatement ps=null;
@@ -179,6 +167,7 @@ public class EditarCadastro extends JFrame {
                 ps.setString(3,  email);
                 ps.setString(4,  Cpf);
                 ps.setString(5,  data);
+                ps.setString(6, EMAIL);
                // ps.setString(6, emailPesquisa );
                 ps.execute();
                 ps.close();
@@ -210,10 +199,7 @@ public class EditarCadastro extends JFrame {
         List <login> list = new ArrayList<login>();
         
         String sql = "select * from login where email = ? ";
-       
-
-   
-     
+ 
        PreparedStatement ps = null;
        ResultSet scann = null;
         try{
@@ -242,37 +228,7 @@ public class EditarCadastro extends JFrame {
         return list;
     }
 
-    private void get(String data){
-        List <login> list = new ArrayList<login>();
-
-   
-        String sql = "select * from login where email = ? ";
-        
-       PreparedStatement ps = null;
-       ResultSet scann = null;
-        try{
-            if(ps == null){
-                ps = Conexao.openDatabase().prepareStatement(sql);
-               ps.setString(1, data);
-                scann = ps.executeQuery();
-                while (scann.next()) {
-                    login login = new login(0, sql, sql);
-                    login.setNome(scann.getString("nome"));
-                    login.setEmail(scann.getString("senha"));
-                    login.setEmail(scann.getString("email"));
-                    login.setCpf(scann.getString("cpf"));
-                    login.setDataNasc(scann.getString("dataNasc"));
-                    //login.setSenha(scann.getString("senha"));
-                    list.add(login);
-                   
-                }
-
-            }
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
-
+  
 
 }
  

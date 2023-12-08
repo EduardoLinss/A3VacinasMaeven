@@ -22,9 +22,9 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import demo.Conexao.Conexao;
-import demo.Frames.caderneta.editarvacinaFrame;
+
 import demo.entidade.alerta;
-import demo.entidade.caderneta;
+
 
 public class editarAlertaFrame extends JFrame {
     
@@ -107,10 +107,7 @@ public class editarAlertaFrame extends JFrame {
                     
                     String nomes = nomeVacinaField.getText();
                     String datas = dataAplicField.getText();
-                    String doses = doseField.getText();
-                    String locais = localField.getText();
-                    String cidades = cidadeField.getText();
-
+                 
                 if(AtualizaAlertaFrames(nomes, datas)){
                  JOptionPane.showMessageDialog(editarAlertaFrame.this,
                  "Dados atualizados com sucesso",

@@ -1,15 +1,19 @@
 package demo.Frames;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,22 +26,27 @@ import demo.Frames.alerta.alertaFrame;
 import demo.Frames.caderneta.cadernetaFrame;
 import demo.Frames.dependentes.dependentesFrames;
 import demo.Frames.login.EditarCadastro;
-import demo.Frames.login.FormLogin;
+
 import demo.Frames.requisicao.requisicaoFramePesquisa;
+
 
 
 public class MainFrame extends JFrame {
     final private Font mainFont = new Font("Arial", Font.BOLD, 18);
 
     JTextField txtUsuario;
-    public void iniciar (){
-        FormLogin x = new FormLogin();
+
+  
+  
+   
+    public  void iniciar (){
+        
        
         JPanel info = new JPanel();
         info.setLayout(new GridLayout(0, 2, 5, 5));
         
         JLabel usuario = new JLabel("Usuario");
-        txtUsuario = new JTextField();
+        txtUsuario = new JTextField("nfleduardo@gmail.com");
     
 
 
@@ -137,6 +146,7 @@ public class MainFrame extends JFrame {
         buttonsPanel.setLayout(new GridBagLayout());      
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
         buttonsPanel.setBounds(10, 10, 30, 30);
+        buttonsPanel.setBackground(Color.CYAN);
         buttonsPanel.add(btnUbs);
         buttonsPanel.add(btnrequisicao);
         buttonsPanel.add(btnAlerta);
@@ -144,18 +154,32 @@ public class MainFrame extends JFrame {
         buttonsPanel.add(btnCaderneta);
         buttonsPanel.add(btnVacinas);
         
-      
+       
         add(info, BorderLayout.NORTH);
         add(buttonsPanel, BoxLayout.X_AXIS);
-        add(btnEditarCadastro, BorderLayout.AFTER_LINE_ENDS);
+        add(btnEditarCadastro, BorderLayout.NORTH);
+        
+    
+       
+     
+        
 
         setTitle("dashboard");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(1100, 550);
+        setBackground(Color.DARK_GRAY);
         setMinimumSize(new Dimension(350, 450));
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
+
+    
+
+    
+
+
+
+    
     
 }

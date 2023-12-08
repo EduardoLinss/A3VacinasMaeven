@@ -22,9 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import demo.Conexao.Conexao;
-import demo.Frames.caderneta.editarvacinaFrame;
-import demo.entidade.alerta;
-import demo.entidade.caderneta;
+
 import demo.entidade.dependentes;
 
 public class editarDependentes extends JFrame {
@@ -152,7 +150,7 @@ public class editarDependentes extends JFrame {
                     
                     e1.printStackTrace();
                 } catch (Exception e1) {
-                    // TODO Auto-generated catch block
+                    
                     e1.printStackTrace();
                 }
             }

@@ -81,7 +81,8 @@ public class DAOlogin extends JFrame {
    
      public static List<login> consultaLogin(){
         List <login> dados = new ArrayList<login>();
-        String sql = "select * from login";
+        String sql = "select * from login where email = ?";
+        String nome = "nfleduardo@gmail.com";
 
        PreparedStatement ps = null;
        ResultSet scann = null;
@@ -89,6 +90,7 @@ public class DAOlogin extends JFrame {
        try{
         if(ps == null){
             ps = Conexao.openDatabase().prepareStatement(sql);
+            ps.setString(1, nome);
             scann = ps.executeQuery();
             while (scann.next()) {
                 login login = new login(0, sql, sql);

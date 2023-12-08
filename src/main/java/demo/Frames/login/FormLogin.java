@@ -230,5 +230,9 @@ public class FormLogin extends JFrame {
    
     }
 
+    public void editarCadastro(){
+        
+    }
+
   
 }

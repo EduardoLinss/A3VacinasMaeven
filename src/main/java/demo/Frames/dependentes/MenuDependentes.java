@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import demo.DAO.DAOdependentes;
-import demo.entidade.dependentes;
+
 
 public class MenuDependentes extends JFrame {
 

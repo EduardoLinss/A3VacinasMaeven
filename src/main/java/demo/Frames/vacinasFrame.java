@@ -29,13 +29,37 @@ public class vacinasFrame extends JFrame {
     JTextField nomeVacinaField;
 
     private JTable tabela;
-    private static DefaultTableModel modeloTabela;
+    private static DefaultTableModel modelo;
+    private JTable tabela2;
+    private static DefaultTableModel modelo2;
+
 
     public void vacinasFrame(){
         
 
-        modeloTabela = new DefaultTableModel();
-        tabela = new JTable(modeloTabela);
+        JPanel todasAsVacinas = new JPanel();
+        todasAsVacinas.setLayout(new GridLayout(0, 1, 10, 10));
+        todasAsVacinas.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
+
+        modelo2 = new DefaultTableModel();
+        tabela2 = new JTable(modelo2);
+        modelo2.addColumn("Vacina");
+        modelo2.addColumn("Tratamento");
+
+        try {
+            Pesquisar3();
+        } catch (Exception e) {
+            
+        }
+        JScrollPane scrollPane2 = new JScrollPane(tabela2);
+        todasAsVacinas.add(scrollPane2);
+
+
+        modelo = new DefaultTableModel();
+        tabela = new JTable(modelo);
+        modelo.addColumn("Vacina");
+        modelo.addColumn("Tratamento");
+
 
         // Adiciona a tabela a um JScrollPane para permitir rolar os dados
         JScrollPane scrollPane = new JScrollPane(tabela);
@@ -72,13 +96,7 @@ public class vacinasFrame extends JFrame {
                        Pesquisar2(pesquisa);
                       
                        
-                        /*for (vacinas u : NomeDaVacina(pesquisa)) {
-                            infos.setLayout(new GridLayout(0, 2, 5, 5));
-                            infos.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
-                            infos.add(new JLabel("Vacina"));
-                            infos.add(new JLabel(u.getNomeVacina()));
-                            infos.add(new JLabel("Tratamento"));
-                            infos.add(new JLabel(u.getTratamento()));*/
+    
                         
                     }
                     
@@ -113,6 +131,7 @@ public class vacinasFrame extends JFrame {
         add(formPanel, BorderLayout.NORTH);
         add(buttonsPanel, BorderLayout.CENTER);
         add(infos, BorderLayout.SOUTH);
+        add(todasAsVacinas);
 
         getContentPane().add(buttonsPanel);
         setTitle("dashboard");
@@ -154,25 +173,18 @@ public class vacinasFrame extends JFrame {
             ps.setString(1, nomeVacina);
             scan = ps.executeQuery();
          
-             modeloTabela.setRowCount(0);
-            int numeroDeColunas = scan.getMetaData().getColumnCount();
+            while(scan.next()){
+                String nome = scan.getString("nomeVacina");
+                String tratamento = scan.getString("tratamento");
+               
 
-             for (int i = 1; i <= numeroDeColunas; i++) {
-                modeloTabela.addColumn(scan.getMetaData().getColumnName(i));
-
+                
+                modelo.addRow(new Object[]{nome, tratamento});
             }
 
-             while (scan.next()) {
-                Object[] linha = new Object[numeroDeColunas];
-                for (int i = 1; i <= numeroDeColunas; i++) {
-                    linha[i - 1] = scan.getObject(i);
-                }
-                modeloTabela.addRow(linha);
-            }
+             
         }
-            
-            //ps.setString(2, password);
-            scan = ps.executeQuery();
+        
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -180,9 +192,9 @@ public class vacinasFrame extends JFrame {
        
 }
 
-    public static List<vacinas> NomeDaVacina(String pesquisa){
+    public static List<vacinas> NomeDaVacina(){
         List <vacinas> dados = new ArrayList<vacinas>();
-        String sql = "select * from vacinas where nomeVacina=?"; 
+        String sql = "select * from vacinas"; 
 
        PreparedStatement ps = null;
        ResultSet scann = null;
@@ -190,13 +202,12 @@ public class vacinasFrame extends JFrame {
        try{
         if(ps == null){
             ps = Conexao.openDatabase().prepareStatement(sql);
-            ps.setString(1, pesquisa);
             ps.executeQuery();
             scann = ps.executeQuery();
             while (scann.next()) {
                 vacinas vacinas = new vacinas(sql, sql);
                
-                vacinas.setId_vacina(scann.getInt("id_Vacina"));
+                //vacinas.setId_vacina(scann.getInt("id_Vacina"));
                 vacinas.setNomeVacina(scann.getString("nomeVacina"));
                 vacinas.setTratamento(scann.getString("tratamento"));
               
@@ -221,5 +232,36 @@ public class vacinasFrame extends JFrame {
        }
        return dados;
     }
+
+    public static void Pesquisar3() throws SQLException{
+        String sql = "select * from vacinas ";
+    
+        PreparedStatement ps = null;
+        ResultSet scan = null;
+        try{
+
+            if(ps == null){
+            ps = Conexao.openDatabase().prepareStatement(sql);
+            
+            scan = ps.executeQuery();
+         
+            while(scan.next()){
+                String nome = scan.getString("nomeVacina");
+                String tratamento = scan.getString("tratamento");
+               
+
+                
+                modelo.addRow(new Object[]{nome, tratamento});
+            }
+
+             
+        }
+        
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+       
+}
 
 }
