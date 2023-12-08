@@ -83,7 +83,7 @@ public class CadastroLogin extends JFrame {
               
              if(insert.CadastrarUsuarioFrame(nomes, senhas, emails, cpfs, dataNascs)){
                 JOptionPane.showMessageDialog(CadastroLogin.this,
-                "Login valido",
+                "Dados validos",
                 "Cadastro feito com sucesso",
                 JOptionPane.INFORMATION_MESSAGE);
             }

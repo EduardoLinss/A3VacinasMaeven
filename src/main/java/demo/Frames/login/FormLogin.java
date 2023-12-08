@@ -65,33 +65,7 @@ public class FormLogin extends JFrame {
                 
 
                 abrir();
-                 /*String email = tfEmail.getText();
-        String password = String.valueOf(pfPassword.getPassword());
-                
-
-                //login user = getAuthenticatedUser(email, password);
-               
-                try {
-                    if (validarLogin(email, password) != false) {
-                         MainFrame mainFrame = new MainFrame();
-                        mainFrame.iniciar();;
-                        dispose();
-                        
-                       // JOptionPane.showMessageDialog(FormLogin.this, "Login válido", "Try agaain", JOptionPane.YES_OPTION);             
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(FormLogin.this,
-                                "Email or Password Invalid",
-                                "Try again",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                } catch (HeadlessException e1) {
-                    
-                    e1.printStackTrace();
-                } catch (SQLException e1) {
-                    
-                    e1.printStackTrace();
-                }*/
+       
               
             }
       
