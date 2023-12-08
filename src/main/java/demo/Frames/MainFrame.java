@@ -144,7 +144,8 @@ public class MainFrame extends JFrame {
     
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridBagLayout());      
-        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
+       // buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
+       buttonsPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 35, 5));
         buttonsPanel.setBounds(10, 10, 30, 30);
         buttonsPanel.setBackground(Color.CYAN);
         buttonsPanel.add(btnUbs);

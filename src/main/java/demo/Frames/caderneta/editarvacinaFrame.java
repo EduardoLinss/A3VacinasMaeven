@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import demo.Conexao.Conexao;
+import demo.Frames.alerta.editarAlertaFrame;
 import demo.entidade.caderneta;
 
 public class editarvacinaFrame extends JFrame {
@@ -118,7 +119,7 @@ public class editarvacinaFrame extends JFrame {
                  JOptionPane.showMessageDialog(editarvacinaFrame.this,
                  "Dados atualizados com sucesso",
                 "Sucesso!",
-                JOptionPane.YES_OPTION);
+                JOptionPane.OK_OPTION);
                     }
                 
                     
@@ -152,12 +153,17 @@ public class editarvacinaFrame extends JFrame {
                     setLocationRelativeTo(null);
                     setVisible(true);
 
+                    }else{
+                        JOptionPane.showMessageDialog(editarvacinaFrame.this,
+                 "Vacina não encontrada",
+                "Erro!",
+                JOptionPane.INFORMATION_MESSAGE);     
                     }
                 } catch (SQLException e1) {
                     
                     e1.printStackTrace();
                 } catch (Exception e1) {
-                    // TODO Auto-generated catch block
+                    
                     e1.printStackTrace();
                 }
             }
@@ -181,16 +187,28 @@ public class editarvacinaFrame extends JFrame {
             }
             
         });
+        JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+               dispose();
+            }
+            
+        });
 
 
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1, 2, 10, 0));
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
-        buttonsPanel.add(btnPesquisar);
-        buttonsPanel.add(btnLimparPesquisa);
         buttonsPanel.add(lbnomeVacina);
         buttonsPanel.add(vacinaAeditarField);
+        buttonsPanel.add(btnPesquisar);
+        buttonsPanel.add(btnLimparPesquisa); 
+        buttonsPanel.add(btnVoltar);
+        
         
            
 
@@ -273,37 +291,7 @@ public static List<caderneta> NomeDaVacina(String pesquisa){
     }
 
 
-    /*public boolean UpdateVacinas(String nomes, String senhas, String emails, String cpfs, String dataNascs) {
-        String sql = "insert into caderneta (nome, senha, email, cpf, dataNasc) values (?, ?, ?, ?, ?)";
-        String pesquisa = vacinaAeditarField.getText();
-        PreparedStatement ps = null;
-        ResultSet scann = null;
-
-        try {
-
-            ps.setString(6, pesquisa);
-            ps.executeQuery();
-
-            if (ps == null){
-            ps = Conexao.openDatabase().prepareStatement(sql);
-            ps.setString(1, nomes);
-            ps.setString(2, senhas);
-            ps.setString(3, emails);
-            ps.setString(4, cpfs);
-            ps.setString(5, dataNascs);
-
-            ps.execute();
-            ps.close();
-            }
-        } catch (SQLException e) {
-            
-            e.printStackTrace();
-        }
-        return ps != null;
-
-    }*/
-
-
+   
     public boolean AtualizaVacinasFrames(String nome, String dataAplic, String dose, String local, String cidade){
         String sql = "update caderneta SET NomeVacina=?, dataAplic=?, dose=?, local=?, cidade = ?  WHERE NomeVacina = ?";
 

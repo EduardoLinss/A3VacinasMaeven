@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import demo.Conexao.Conexao;
 import demo.DAO.DAOlogin;
-
+import demo.Frames.caderneta.editarvacinaFrame;
 import demo.entidade.login;
 
 
@@ -126,8 +126,26 @@ public class EditarCadastro extends JFrame {
                                 seila();
                         }
                         
-                    }); 
-                    add(btnSalvar, BorderLayout.SOUTH);
+                    });
+                    JButton btnVoltar = new JButton("Cancelar"); 
+                    btnVoltar.addActionListener(new ActionListener() {
+
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                           
+                            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                            dispose();
+                        }
+                        
+                    });
+
+                    JPanel buttonsPanel = new JPanel();
+                    buttonsPanel.setLayout(new GridLayout(1, 2, 10, 0));
+                    buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
+                    buttonsPanel.add(btnSalvar);
+                    buttonsPanel.add(btnVoltar);
+                    add(buttonsPanel, BorderLayout.SOUTH);
+                   
                     }//else{
                        // System.out.println("EMAIL");
                     //}
@@ -151,7 +169,7 @@ public class EditarCadastro extends JFrame {
     }
 
     
-    public void AtualizarCadastroFrame(String nome, String senha, String email, String Cpf, String data){
+    public boolean AtualizarCadastroFrame(String nome, String senha, String email, String Cpf, String data){
         String sql = "update login SET nome=?, senha =?, email=?, cpf=?, dataNasc = ?  WHERE email = ?";
 
         String EMAIL = "nfleduardo@gmail.com";
@@ -177,6 +195,7 @@ public class EditarCadastro extends JFrame {
         }catch(SQLException e){
             e.printStackTrace();
         }
+        return ps != null;
 
     }
 
@@ -191,7 +210,14 @@ public class EditarCadastro extends JFrame {
                             String Cpf = cpfUsuarioField.getText();
                             String data = dataUsuarioField.getText();
 
-                            AtualizarCadastroFrame(nome, senha, email, Cpf, data);
+                            if(AtualizarCadastroFrame(nome, senha, email, Cpf, data)){
+                                  JOptionPane.showMessageDialog(EditarCadastro.this,
+                 "Dados atualizados com sucesso",
+                "Sucesso!",
+                JOptionPane.INFORMATION_MESSAGE);
+                            }
+
+                            
     }
 
 

@@ -112,7 +112,7 @@ public class editarAlertaFrame extends JFrame {
                  JOptionPane.showMessageDialog(editarAlertaFrame.this,
                  "Dados atualizados com sucesso",
                 "Sucesso!",
-                JOptionPane.YES_OPTION);
+                JOptionPane.INFORMATION_MESSAGE);
                     }
                 
                     
@@ -175,15 +175,27 @@ public class editarAlertaFrame extends JFrame {
             }
             
         });
+        JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               
+                setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                dispose();
+            }
+            
+        });
 
 
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1, 2, 10, 0));
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
-        buttonsPanel.add(btnPesquisar);
-        buttonsPanel.add(btnLimparPesquisa);
-        buttonsPanel.add(lbnomeVacina);
+        buttonsPanel.add(btnPesquisar, BorderLayout.SOUTH);
+        buttonsPanel.add(btnLimparPesquisa, BorderLayout.NORTH);
+        buttonsPanel.add(btnVoltar, BorderLayout.SOUTH);
+        buttonsPanel.add(lbnomeVacina, BorderLayout.NORTH);
         buttonsPanel.add(vacinaAeditarField);
         
            
