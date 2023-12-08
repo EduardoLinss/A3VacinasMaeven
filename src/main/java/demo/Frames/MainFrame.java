@@ -28,6 +28,8 @@ import demo.Frames.dependentes.dependentesFrames;
 import demo.Frames.login.EditarCadastro;
 
 import demo.Frames.requisicao.requisicaoFramePesquisa;
+import demo.Frames.ubs.ubs;
+import demo.Frames.vacinas.vacinasFrame;
 
 
 

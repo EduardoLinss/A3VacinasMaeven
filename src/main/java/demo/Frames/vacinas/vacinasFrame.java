@@ -1,4 +1,4 @@
-package demo.Frames;
+package demo.Frames.vacinas;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
