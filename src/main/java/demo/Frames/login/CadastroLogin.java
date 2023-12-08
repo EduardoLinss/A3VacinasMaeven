@@ -85,7 +85,7 @@ public class CadastroLogin extends JFrame {
                 JOptionPane.showMessageDialog(CadastroLogin.this,
                 "Login valido",
                 "Cadastro feito com sucesso",
-                JOptionPane.OK_OPTION);
+                JOptionPane.INFORMATION_MESSAGE);
             }
             else 
             {
